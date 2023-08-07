@@ -1,0 +1,960 @@
+* {
+    margin: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Roboto", sans-serif;
+}
+
+.navbar {
+    width: 100%;
+    height: 80px;
+    background-color: #ddd;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    box-shadow: 0 4px 8px rgba(209, 26, 26, 0);
+}
+
+.navbar-container {
+    display: flex;
+    align-items: center;
+    padding: 0 0px;
+    height: 100%;
+    font-family: "Sen", sans-serif;
+}
+
+.logo {
+    position: relative;
+    display: inline-block;
+}
+
+.logo img:first-child {
+    margin-right: 20px;
+    /* Adjust the value as needed for the desired space between logos */
+}
+
+.logo::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 42%;
+    border-left: 0.5px solid #ffffff;
+    height: 90%;
+    /* Change color and style as needed */
+}
+
+.logo-container {
+    flex: 1;
+}
+
+.logo a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    margin: auto;
+    padding: auto;
+}
+
+.menu-container {
+    padding: 10px;
+    /* Add some padding around the menu items */
+}
+
+.menu-list {
+    list-style: none;
+    /* Remove default list bullets */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    /* Use flexbox to create a horizontal menu */
+}
+
+.menu-list-item {
+    margin-right: 15px;
+    /* Add some space between the menu items */
+}
+
+.menu-list-item a {
+    text-decoration: none;
+    /* Remove underlines from links */
+    color: #333;
+    /* Change to the desired text color for the menu items */
+    padding: 10px 18px;
+    /* Add padding around the text inside the menu items */
+    border-radius: 5px;
+    /* Add rounded corners to the menu items */
+}
+
+.menu-list-item a:hover {
+    background-color: #ffffff;
+    /* Change to the desired background color on hover */
+    color: #000;
+    /* Change to the desired text color on hover */
+}
+
+.menu-btn {
+    display: none;
+    /* Hide the checkbox label by default */
+}
+
+@media screen and (max-width: 960px) {
+    .menu-container {
+        display: flex;
+        justify-content: space-between;
+        height: 80px;
+        z-index: 1;
+        width: 100%;
+        max-width: 1300px;
+        padding: 0;
+    }
+    .menu-list {
+        display: grid;
+        grid-template-columns: auto;
+        margin: 0;
+        width: 100%;
+        position: absolute;
+        top: -1000px;
+        opacity: 1;
+        transition: all 0.5s ease;
+        z-index: -1;
+    }
+    .menu-list.active {
+        background: #131313;
+        top: 100%;
+        opacity: 1;
+        transition: all 0.5s ease;
+        z-index: 99;
+        height: 60vh;
+        font-size: 1.6rem;
+    }
+    #menu-toggle {
+        position: absolute;
+        top: 20%;
+        right: 5%;
+        transform: translate(5%, 20%);
+    }
+    .menu-btn {
+        display: block;
+        cursor: pointer;
+    }
+    #menu-toggle:checked+.menu-list {
+        display: grid;
+        background: #131313;
+        top: 100%;
+        opacity: 1;
+        transition: all 0.5s ease;
+        z-index: 99;
+        height: 60vh;
+        font-size: 1.6rem;
+    }
+    .menu-list-item {
+        width: 100%;
+    }
+    .menu-list-item a {
+        text-decoration: none;
+        color: #fff;
+        padding: 2rem;
+        width: 100%;
+        display: table;
+    }
+    .menu-list-item a:hover {
+        background-color: #444;
+    }
+}
+
+.profile-container {
+    padding: 20px;
+}
+
+.profile-picture {
+    width: 40px;
+    height: 40px;
+    border-radius: 10%;
+    object-fit: cover;
+    top: 0%;
+}
+
+.flag-picture {
+    width: 570px;
+    float: left;
+    margin: 0px 0px 0px 0px;
+    bottom: 0%;
+}
+
+.toggle {
+    width: 40px;
+    height: 20px;
+    background-color: rgb(0, 0, 0);
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    position: relative;
+}
+
+.toggle-icon {
+    color: goldenrod;
+}
+
+.toggle-ball {
+    width: 18px;
+    height: 18px;
+    background-color: black;
+    position: absolute;
+    right: 1px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 1s ease all;
+}
+
+.sidebar {
+    width: 40px;
+    height: 100%;
+    background-color: #ffffff;
+    position: fixed;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 130px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.sidebar a {
+    text-decoration: none;
+    font-size: 11px;
+    padding: 25px 18px;
+   
+    border-radius: 5px;
+   
+}
+/* Style for tooltip text */
+.tooltip-text {
+    width: 0;
+  
+    overflow: hidden;
+    background-color: #e7e4e4;
+    color: #000;
+    text-align:center;
+    border-radius: 6px;
+    padding: 0px;
+    position: absolute;
+    z-index: 1;
+    
+    transition: width 0.4s ease-out;
+}
+
+/* Show the tooltip text on hover */
+a:hover .tooltip-text {
+    width:190% ;
+   
+    margin-bottom: 5px;
+    visibility: visible;
+    
+    
+}
+
+
+.sidebar a:hover {
+    background-color: #e7e4e4;
+    /* Change to the desired background color on hover */
+    color: #000;
+
+    /* Change to the desired text color on hover */
+}
+
+
+.left-menu-icon {
+    color: rgb(0, 0, 0);
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+.container {
+    background-color: #ffffff;
+    min-height: calc(100vh - 50px);
+}
+
+.content-container {
+    margin-left: 50px;
+}
+
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.background img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.featured-content img {
+    width: 100%;
+    background-image: url('images/templeart.jpg');
+    background-repeat: repeat;
+    background-size: contain;
+}
+
+.featured-desc {
+    width: 500px;
+    color: lightgray;
+    margin: 30px 0;
+}
+
+.featured-button {
+    background-color: #4dbf00;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    font-weight: bold;
+}
+
+.places-list-container {
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #e7e4e4;
+    margin: 10px;
+}
+
+.places-list-title {
+    font-family: Courier New, monospace;
+    font-size: 36px;
+    color: darkred;
+    padding: 10px;
+    position: relative;
+    left: 15px;
+    top: 5px;
+}
+
+.places-list-wrapper {
+    height: 500px;
+    max-width: 100%;
+    padding: 20px;
+}
+
+.places-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* Updated to 2x2 grid */
+    grid-gap: 20px;
+    align-items: center;
+    height: 400px;
+    transform: translateX(0);
+    transition: all 1s ease-in-out;
+}
+
+.places-list-item {
+    margin-right: 0px;
+    position: relative;
+}
+
+.places-list-item:hover .places-list-item-img {
+    transform: scale(1.1);
+    margin: 0 40px;
+    opacity: 0.5;
+}
+
+.places-list-item:hover .places-list-item-title,
+.places-list-item:hover .places-list-item-desc,
+.places-list-item:hover .places-list-item-button {
+    opacity: 1;
+}
+
+.places-list-item-img {
+    transition: all 1s ease-in-out;
+    width: 350px;
+    /* Adjust image size to fit the 2x2 grid */
+    height: 250px;
+    /* Adjust image size to fit the 2x2 grid */
+    object-fit: cover;
+    border-radius: 20px;
+}
+
+.places-list-item-title {
+    padding: 0 10px;
+    font-size: 18px;
+    font-weight: bold;
+    position: absolute;
+    top: 10%;
+    left: 280px;
+    opacity: 0;
+    color: rgb(36, 7, 128);
+}
+
+.places-list-item-desc {
+    padding: 10px;
+    font-size: 12px;
+    position: absolute;
+    top: 20%;
+    left: 25px;
+    width: 350px;
+    /* Adjust text width to fit the 2x2 grid */
+    opacity: 0;
+    transition: 0.3s all ease-in-out;
+}
+
+.todo-list-container {
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #e7e4e4;
+    margin: 10px;
+}
+
+.todo-list-title {
+    font-family: Courier New, monospace;
+    font-size: 36px;
+    color: darkred;
+    padding: 10px;
+    position: relative;
+    left: 15px;
+    top: 5px;
+}
+
+.todo-list-wrapper {
+    height: 500px;
+    max-width: 100%;
+    padding: 20px;
+}
+
+.todo-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* Updated to 2x2 grid */
+    grid-gap: 20px;
+    align-items: center;
+    height: 400px;
+    transform: translateX(0);
+    transition: all 1s ease-in-out;
+}
+
+.todo-list-item {
+    margin-right: 0px;
+    position: relative;
+}
+
+.todo-list-item:hover .todo-list-item-img {
+    transform: scale(1.1);
+    margin: 0 40px;
+    opacity: 0.5;
+}
+
+.todo-list-item:hover .todo-list-item-title,
+.todo-list-item:hover .todo-list-item-desc,
+.todo-list-item:hover .todo-list-item-button {
+    opacity: 1;
+}
+
+.todo-list-item-img {
+    transition: all 1s ease-in-out;
+    width: 350px;
+    /* Adjust image size to fit the 2x2 grid */
+    height: 250px;
+    /* Adjust image size to fit the 2x2 grid */
+    object-fit: cover;
+    border-radius: 20px;
+}
+
+.todo-list-item-title {
+    padding: 0 10px;
+    font-size: 18px;
+    font-weight: bold;
+    position: absolute;
+    top: 5%;
+    left: 280px;
+    opacity: 0;
+    color: rgb(36, 7, 128);
+}
+
+.todo-list-item-desc {
+    padding: 10px;
+    font-size: 12px;
+    position: absolute;
+    top: 15%;
+    left: 25px;
+    width: 350px;
+    /* Adjust text width to fit the 2x2 grid */
+    opacity: 0;
+    transition: 0.3s all ease-in-out;
+}
+
+.fes-list-container {
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #e7e4e4;
+    margin: 10px;
+}
+
+.fes-list-title {
+    font-family: Courier New, monospace;
+    font-size: 36px;
+    color: darkred;
+    padding: 10px;
+    position: relative;
+    left: 15px;
+    top: 5px;
+}
+
+.fes-list-wrapper {
+    height: 500px;
+    max-width: 100%;
+    padding: 20px;
+}
+
+.fes-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* Updated to 2x2 grid */
+    grid-gap: 20px;
+    align-items: center;
+    height: 400px;
+    transform: translateX(0);
+    transition: all 1s ease-in-out;
+}
+
+.fes-list-item {
+    margin-right: 0px;
+    position: relative;
+}
+
+.fes-list-item:hover .fes-list-item-img {
+    transform: scale(1.1);
+    margin: 0 40px;
+    opacity: 0.5;
+}
+
+.fes-list-item:hover .fes-list-item-title,
+.fes-list-item:hover .fes-list-item-desc,
+.fes-list-item:hover .fes-list-item-button {
+    opacity: 1;
+}
+
+.fes-list-item-img {
+    transition: all 1s ease-in-out;
+    width: 350px;
+    /* Adjust image size to fit the 2x2 grid */
+    height: 250px;
+    /* Adjust image size to fit the 2x2 grid */
+    object-fit: cover;
+    border-radius: 20px;
+}
+
+.fes-list-item-title {
+    padding: 0 10px;
+    font-size: 18px;
+    font-weight: bold;
+    position: absolute;
+    top: 5%;
+    left: 280px;
+    opacity: 0;
+    color: rgb(36, 7, 128);
+}
+
+.fes-list-item-desc {
+    padding: 10px;
+    font-size: 12px;
+    position: absolute;
+    top: 20%;
+    left: 25px;
+    width: 350px;
+    /* Adjust text width to fit the 2x2 grid */
+    opacity: 0;
+    transition: 0.3s all ease-in-out;
+}
+
+@media only screen and (min-width: 1920px) {
+    .places-list,
+    .todo-list,
+    .fes-list {
+        grid-template-columns: repeat(4, 1fr);
+        /* Use 3 columns for wider screens */
+    }
+    .places-list-item-title,
+    .todo-list-item-title,
+    .fes-list-item-title {
+        font-size: 20px;
+        top: 3%;
+        left: 25px;
+        /* Decrease title font size for wider screens */
+    }
+    .places-list-item-desc,
+    .todo-list-item-desc,
+    .fes-list-item-desc {
+        font-size: 12.5px;
+        top: 15%;
+        /* Decrease description font size for wider screens */
+    }
+}
+
+
+.form-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.contact-form {
+    background-color: #f2f2f2;
+    padding: 20px;
+    border-radius: 5px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    flex: 0 0 50%;
+    /* Adjust the width as needed */
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 50%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 8px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.cards {
+    margin: 0 auto;
+    max-width: 900px;
+    align-items: flex-end;
+}
+
+.cards h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    padding: 30px;
+}
+
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px;
+}
+
+.card {
+    max-width: 470px;
+    max-height: 500px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #e7e4e4;
+    text-align: center;
+    margin: 10px;
+}
+
+.card img {
+    width: 103px;
+    height: 120px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.card h2 {
+    margin: 0;
+    color: #333;
+}
+
+.card p {
+    margin: 5px 0;
+    color: #666;
+}
+
+.card p a {
+    margin: 5px 0;
+    color: #666;
+    text-decoration: none;
+}
+
+
+/* Footer styles */
+
+.footer {
+    width: 100%;
+    height: 70px;
+    background-color: rgb(225, 224, 224);
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.footer-container {
+    display: flex;
+    align-items: center;
+    padding: 0 50px;
+    height: 100%;
+    background-color: #a3a3a3;
+    font-family: "Sen", sans-serif;
+}
+
+.footer a img {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    margin: auto;
+    padding: auto;
+}
+
+.footer p {
+    color: #000000;
+    /* Blue color for the links */
+    text-align: center;
+    text-decoration: none;
+    padding: 8px;
+    /* Add padding to the text inside the paragraph (adjust as needed) */
+}
+
+.footer a:hover {
+    text-decoration: underline;
+    /* Add underline on hover */
+}
+
+.college-logo {
+    max-width: 100px;
+    display: block;
+    /* Ensures the logo is centered within the footer */
+    margin: 5px auto;
+    /* Add some margin to center the logo vertically within the footer */
+}
+
+.container.active {
+    background-color: white;
+}
+
+.places-list-title.active {
+    color: rgb(255, 250, 250);
+}
+
+.todo-list-title.active {
+    color: rgb(255, 250, 250);
+}
+
+.fes-list-title.active {
+    color: rgb(255, 250, 250);
+}
+
+.plan-list-title.active {
+    color: rgb(255, 250, 250);
+}
+
+.navbar-container.active {
+    background-color: white;
+    color: rgb(255, 243, 243);
+}
+
+.sidebar.active {
+    background-color: white;
+}
+
+.left-menu-icon.active {
+    color: black;
+}
+
+.toggle.active {
+    background-color: black;
+}
+
+.toggle-ball.active {
+    background-color: white;
+    transform: translateX(-20px);
+}
+
+@media only screen and (max-width: 480px) {
+    .navbar-container {
+        padding: 0 10px;
+        /* Adjust padding for smaller screens */
+    }
+    .menu-list {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        /* Center-align the menu items */
+        gap: 10px;
+        position: absolute;
+        top: 80px;
+        /* Adjust the top position to push menu down */
+        right: 0;
+        background: #ddd;
+        opacity: 0;
+        /* Hide the menu by default */
+        transition: all 0.3s ease;
+        z-index: 99;
+    }
+    .menu-btn {
+        display: block;
+        cursor: pointer;
+    }
+    .menu-btn:checked+.menu-list {
+        opacity: 1;
+        /* Show the menu when the checkbox is checked */
+        top: 80px;
+    }
+    .search-container {
+        float: none;
+        margin-bottom: 20px;
+    }
+    .logo-text {
+        font-size: 16px;
+        /* Adjust font size for smaller screens */
+    }
+    .content-container {
+        margin: 20px 10px;
+        /* Adjust content container margin for smaller screens */
+    }
+    .background img {
+        max-width: 100%;
+        /* Scale down the background image for smaller screens */
+        height: auto;
+    }
+    .cards {
+        display: flex;
+        flex-direction: column;
+        /* Set cards to display in a single column for smaller screens */
+        align-items: center;
+        /* Center-align the cards */
+    }
+    .card {
+        max-width: 100%;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .navbar-container {
+        padding: 0 10px;
+        /* Adjust padding for smaller screens */
+    }
+    .menu-list {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        /* Center-align the menu items */
+        gap: 10px;
+        position: absolute;
+        top: 80px;
+        /* Adjust the top position to push menu down */
+        right: 0;
+        background: #ddd;
+        opacity: 0;
+        /* Hide the menu by default */
+        transition: all 0.3s ease;
+        z-index: 99;
+    }
+    .menu-btn {
+        display: block;
+        cursor: pointer;
+    }
+    .menu-btn:checked+.menu-list {
+        opacity: 1;
+        /* Show the menu when the checkbox is checked */
+        top: 80px;
+    }
+    .search-container {
+        float: none;
+        margin-bottom: 20px;
+    }
+    .logo-text {
+        font-size: 18px;
+        /* Adjust font size for smaller screens */
+    }
+    .content-container {
+        margin: 20px 10px;
+        /* Adjust content container margin for smaller screens */
+    }
+    .background img {
+        max-width: 100%;
+        /* Scale down the background image for smaller screens */
+        height: auto;
+    }
+    .form-container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    .form-group {
+        margin-bottom: 20px;
+        flex: 1 1 100%;
+        /* Make form groups take full width on smaller screens */
+    }
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+    .form-group input,
+    .form-group textarea {
+        width: 100%;
+        /* Make input and textarea take full width on smaller screens */
+    }
+    .cards {
+        margin: 0 auto;
+        max-width: 900px;
+        align-items: flex-end;
+    }
+    .card-container {
+        display: flex;
+        flex-wrap: wrap;
+        /* Allow cards to wrap to new line on smaller screens */
+        justify-content: center;
+        /* Center-align the cards */
+    }
+    .card {
+        max-width: 100%;
+        width: 250px;
+       
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: #e7e4e4;
+        text-align: center;
+        margin: 10px;
+    }
+    
+}
